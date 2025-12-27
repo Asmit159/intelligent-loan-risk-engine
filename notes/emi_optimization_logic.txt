@@ -1,0 +1,175 @@
+EMI OPTIMIZATION LOGIC & AFFORDABILITY CONSTRAINTS
+
+1. Purpose of EMI Optimization
+
+After determining the applicant’s risk category and interest rate, the next objective is to recommend affordable and optimal EMI options that:
+
+	-Minimize default risk for the bank
+	-Keep repayment stress within acceptable limits for the customer
+	-Provide multiple choices instead of a single rigid EMI
+
+This step converts a pricing decision into a customer-facing financial plan.
+
+
+
+
+2. EMI Calculation Overview
+
+The system uses the standard banking EMI formula:
+
+𝐸𝑀𝐼=(P.r.(1+r)^n)/((1+r)^n -1))
+	​
+
+
+Where:
+P = Loan Amount
+r = Monthly Interest Rate (annual rate / 12)
+n = Loan tenure in months
+
+
+This formula ensures:
+	-Higher interest rates result in higher EMIs
+	-Longer tenures reduce EMI but increase total interest paid
+
+
+
+
+
+3. Affordability Constraint (Critical Business Rule)
+
+Regardless of model output, the system enforces a hard affordability rule:
+
+		Maximum EMI ≤ 40% of Monthly Income
+
+
+Rationale:
+
+-EMIs above this threshold significantly increase default probability
+
+-This protects both the borrower and the lender
+
+
+If no EMI option satisfies this constraint, the system will:
+
+-Suggest reducing the loan amount
+
+-Or recommend rejecting the loan
+
+
+
+
+
+4. EMI Option Generation
+
+Instead of recommending a single EMI, the system generates multiple EMI options across common tenures:
+
+12 months
+
+24 months
+
+36 months
+
+48 months
+
+60 months
+
+
+For each tenure:
+
+-EMI is calculated using the approved interest rate
+
+-Affordability constraint is checked
+
+-Only valid EMI options are retained
+
+
+This gives the borrower flexibility and transparency.
+
+
+
+
+5. Ranking of EMI Options
+
+Valid EMI options are ranked based on different optimization goals:
+
+-Lowest EMI → best for monthly cash flow
+
+-Lowest total interest paid → best long-term cost
+
+-Balanced option → trade-off between EMI and interest
+
+Example output:
+
+Recommended EMI Options:
+• ₹12,500 for 36 months (Best balance)
+• ₹9,200 for 60 months (Lowest EMI)
+• ₹18,000 for 24 months (Lowest total interest)
+
+
+
+
+
+
+6. Integration with Risk & Interest Rate Logic
+
+
+The EMI optimization module operates after interest rate assignment:
+
+
+Approval Probability → Risk Score → Risk Bucket → Interest Rate → EMI Options
+
+
+Key principle:
+
+EMI optimization does not influence risk estimation; it only operates on approved and priced loans.
+
+This separation ensures:
+
+	Clean system design
+
+	Explainability
+
+	Regulatory safety
+
+
+
+
+
+
+7. Business Impact
+
+For the Bank
+
+	-Reduced default probability
+
+	-Risk-adjusted pricing consistency
+
+	-Controlled exposure through affordability checks
+
+For the Customer
+
+	-Transparent repayment options
+
+	-EMI within financial comfort zone
+
+	-Clear understanding of trade-offs
+
+
+
+
+
+
+
+8. Design Philosophy
+
+-Machine Learning estimates risk, not repayment plans
+
+-Financial rules ensure stability and safety
+
+-EMI recommendations balance customer affordability and bank profitability
+
+-This approach reflects real-world loan underwriting systems, not a toy ML implementation.
+
+
+
+END OF EMI OPTIMIZATION LOGIC.EOF

@@ -15,7 +15,7 @@ Instead of treating loan approval as a simple yes/no prediction, the system:
   - Interest rate
   - EMI options under affordability constraints
 
-The system is intentionally built using **logistic regression**, following principles from **Andrew Ng’s Supervised Machine Learning course**, with a strong focus on **interpretability, safety, and business realism**.
+The system is intentionally built using **logistic regression**, with a strong focus on **interpretability, safety, and business realism**.
 
 ---
 

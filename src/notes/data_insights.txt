@@ -1,0 +1,95 @@
+Column-by-Column Meaning:
+Let’s carefully understand our exact dataset.
+
+1. loan_id:
+	-Identifier only
+	-Dropping it
+	-No predictive value
+
+2. no_of_dependents:
+	-Number of people financially dependent on applicant
+	-More dependents -> higher expenses -> higher risk
+
+3. education:
+	-Graduate / Not Graduate
+	-Proxy for income stability and earning potential
+
+4. self_employed:
+	-Yes / No
+	-Self-employed income is less predictable -> higher risk
+
+5. income_annum:
+	-Annual income
+	-Strong positive factor
+	-Will require feature scaling to ensure balanced learning during optimization
+
+6. loan_amount
+	-Amount requested
+	-Higher loan → higher EMI → higher risk
+
+7. loan_term
+	-Loan tenure (months or years)
+	-Longer term → lower EMI but more interest risk
+
+8. cibil_score(MOST IMPORTANT FEATURE)
+	-Direct creditworthiness signal
+	-Main Segregation factor
+
+9. Asset Values (VERY POWERFUL)
+	-residential_assets_value
+	-House / flat value
+	-commercial_assets_value
+	-Shops, offices
+
+10.luxury_assets_value
+	-Cars, luxury goods
+
+11.bank_asset_value
+	-Savings, fixed deposits
+
+
+
+-->> These asset-related features act as compensating risk factors, explaining approvals even for applicants with lower CIBIL scores.
+
+
+12. loan_status (TARGET )
+	-Approved / Rejected
+	-This is what our model learns
+
+
+
+
+Key Observations:
+
+1. Loan approval is strongly correlated with CIBIL score.
+2. Applicants with CIBIL > ~550 are mostly approved.
+3. Exceptions exist where applicants with lower CIBIL are approved due to:
+   - High income
+   - High asset values
+   - Stable employment
+4. This suggests a multi-factor decision-making process rather than a hard threshold.
+
+
+
+Expected importance of Features-
+1. CIBIL score
+2. Income
+3. Total assets
+4. Loan amount
+5. Employment type
+6. Dependents
+7. Education
+
+
+We will let the model learn the high importance of CIBIL Score Naturally, without hardcoding thresholds .
+Our model will learn:
+
+High cibil_score → strong positive weight
+
+High assets → moderate positive weight
+
+High loan_amount → negative weight
+
+Many dependents → negative weight
+
+The probability curve shifts based on combinations.

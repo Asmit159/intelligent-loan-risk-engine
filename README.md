@@ -30,6 +30,7 @@ Pure rule-based systems are rigid, while black-box ML models are hard to audit.
 ### Goal:
 > Use ML to **estimate risk**, and business logic to **make financial decisions** that are explainable and safe.
 
+---
 
 ## 🛠 Tech Stack & Tools
 <p style="text-align:=centre:">
